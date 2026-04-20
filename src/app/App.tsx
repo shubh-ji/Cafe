@@ -25,6 +25,17 @@ h1,h2,h3,h4,h5{font-family:Georgia,'Times New Roman',serif}
 button{font-family:inherit;cursor:pointer}
 input,select,textarea{font-family:inherit}
 
+/* ── Loading Screen */
+.lc-loader{position:fixed;inset:0;z-index:9999;background:#2C2A24;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;visibility:visible;transition:opacity 0.6s ease,visibility 0.6s ease}
+.lc-loader.done{opacity:0;visibility:hidden}
+.lc-loader-content{text-align:center}
+.lc-loader-title{font-family:Georgia,serif;font-size:1.6rem;color:#F7F0E6;margin-bottom:6px;letter-spacing:0.08em}
+.lc-loader-title em{color:#C9906A;font-style:normal}
+.lc-loader-bar{width:160px;height:2px;background:rgba(201,144,106,0.15);margin:24px auto;border-radius:1px;overflow:hidden;position:relative}
+.lc-loader-shimmer{position:absolute;inset:0;background:linear-gradient(to right,transparent,#C9906A,transparent);animation:shimmer 1.2s infinite}
+@keyframes shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+.lc-loader-text{font-size:0.68rem;color:rgba(201,144,106,0.4);text-transform:uppercase;letter-spacing:0.16em;margin-top:20px}
+
 /* ── Navbar */
 .lc-nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(44,42,36,0.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,144,106,0.15)}
 .lc-logo{font-family:Georgia,serif;color:#F7F0E6;font-size:1.2rem;letter-spacing:0.04em;background:none;border:none;padding:0;display:flex;align-items:center;gap:9px}
@@ -35,6 +46,15 @@ input,select,textarea{font-family:inherit}
 .lc-navlinks button::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--pri);transition:width 0.3s}
 .lc-navlinks button:hover,.lc-navlinks button.active{color:var(--pri)}
 .lc-navlinks button:hover::after,.lc-navlinks button.active::after{width:100%}
+
+/* ── Mobile Hamburger */
+.lc-ham{display:none;background:none;border:none;color:#F7F0E6;width:32px;height:32px;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.lc-ham svg{width:20px;height:20px}
+.lc-mob-menu{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:290;background:rgba(44,42,36,0.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;translate:0 -100%;pointer-events:none;transition:opacity 0.35s,translate 0.35s cubic-bezier(0.16,1,0.3,1)}
+.lc-mob-menu.open{opacity:1;translate:0;pointer-events:auto}
+.lc-mob-menu button{background:none;border:none;color:#C8B89A;font-size:1rem;letter-spacing:0.16em;text-transform:uppercase;transition:color 0.25s;padding:0}
+.lc-mob-menu button:hover{color:var(--pri)}
+@media(max-width:640px){.lc-ham{display:flex}.lc-navlinks{display:none}}
 
 /* ── Page */
 .lc-page{opacity:1}
@@ -95,7 +115,7 @@ input,select,textarea{font-family:inherit}
 /* ── Food Carousel */
 .lc-touch-sec{background:var(--sec);padding:80px 0;overflow:hidden}
 .lc-touch-head{padding:0 64px;margin-bottom:40px}
-.lc-food-track{display:flex;gap:20px;padding:8px 64px 8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;touch-action:pan-x}
+.lc-food-track{display:flex;gap:20px;padding:8px 64px 8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;cursor:grab;touch-action:auto}
 .lc-food-track:active{cursor:grabbing}
 .lc-food-track::-webkit-scrollbar{display:none}
 .lc-tex-card{flex-shrink:0;width:320px;height:460px;border-radius:12px;overflow:hidden;position:relative;scroll-snap-align:center;transition:transform 0.4s cubic-bezier(0.16,1,0.3,1),opacity 0.4s}
@@ -289,7 +309,7 @@ input,select,textarea{font-family:inherit}
 .lc-res-visual-title{color:#F7F0E6;font-family:Georgia,serif;font-size:1.5rem;line-height:1.2;margin-bottom:8px}
 .lc-res-visual-sub{color:rgba(228,210,182,0.65);font-size:0.82rem;line-height:1.6}
 .lc-res-form-side{flex:1;padding:36px 36px 32px;overflow-y:auto;position:relative}
-.lc-res-bar{display:none}
+.lc-res-bar{display:none;height:4px;width:40px;background:rgba(201,144,106,0.3);border-radius:2px;margin:0 auto 16px}
 .lc-res-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .lc-res-title{font-family:Georgia,serif;color:var(--sec);font-size:1.35rem;line-height:1.2}
 .lc-res-x{background:rgba(44,42,36,0.06);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background 0.25s,color 0.25s;flex-shrink:0}
@@ -350,24 +370,56 @@ input,select,textarea{font-family:inherit}
 }
 @media(max-width:640px){
   .lc-nav{padding:0 18px}
-  .lc-sec{padding:64px 20px}
+  .lc-sec{padding:56px 18px}
+  .lc-hero-content{padding:0 20px}
+  .lc-scroll-hint{bottom:18px}
+  .lc-kota{padding:28px 22px}
+  .lc-kota-title{font-size:0.95rem}
+  .lc-quote-text{font-size:clamp(1.2rem,5vw,1.6rem)}
+  .lc-fab{bottom:20px;right:16px}
+  .lc-fab-btn{padding:12px 18px;font-size:0.78rem;border-radius:20px}
   .lc-feats{grid-template-columns:1fr}
   .lc-menu-hero{padding:120px 20px 52px}
   .lc-menu-body{padding:40px 20px 60px}
   .lc-quote{padding:72px 24px}
   .lc-cat-hdr{padding:18px 20px}
   .lc-item{padding:16px 20px;flex-wrap:wrap;gap:12px}
+  .lc-item-name{font-size:1rem}
+  .lc-price{font-size:0.95rem}
   .lc-footer{padding:48px 20px 24px}
-  .lc-footer-grid{grid-template-columns:1fr}
+  .lc-footer-grid{grid-template-columns:1fr;gap:28px}
+  .lc-footer-bar{flex-direction:column;text-align:center;gap:12px}
   .lc-touch-head{padding:0 20px}
   .lc-touch-scroll{padding:8px 20px 28px}
   .lc-bento{padding:64px 20px}
-  .lc-bento-row2{grid-template-columns:1fr}
-  .lc-res-panel{padding:28px 22px 32px}
+  .lc-bento-grid{grid-template-columns:1fr}
+  .lc-bento-main{min-height:240px}
+  .lc-bento-row2{grid-template-columns:1fr;gap:12px}
+  .lc-bento-row2 .lc-bento-img{height:200px}
+  .lc-bento-quote-text{font-size:1rem;line-height:1.4}
+  .lc-res-panel{padding:28px 22px 32px;max-width:480px;border-radius:20px}
+  .lc-res-bar{display:flex;justify-content:center;margin-bottom:16px}
   .lc-res-row{grid-template-columns:1fr}
   .lc-nooks{grid-template-columns:1fr 1fr}
   .lc-find{padding:64px 20px}
+  .lc-find-inner{grid-template-columns:1fr;gap:40px}
+  .lc-find-heading{text-align:center;font-size:clamp(1.5rem,4vw,2rem)}
+  .lc-find-sub{text-align:center}
+  .lc-find-detail{margin-bottom:20px}
+  .lc-find-btn{display:flex;justify-content:center;width:100%}
   .lc-tilt{width:280px;height:240px}
+  .lc-tilt-marq-outer{padding:32px 0}
+  .lc-tilt-marq-track{animation:tiltMarq 45s linear infinite}
+  .lc-tex-card{width:280px;height:400px}
+  .lc-tex-card.premium{width:300px}
+  .lc-food-track{padding:8px 20px 8px;gap:14px}
+  .lc-time-filter{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .lc-time-filter::-webkit-scrollbar{display:none}
+  .lc-tf-btn{flex-shrink:0}
+  .lc-res-form-side{padding:28px 24px 24px}
+  .lc-res-visual{display:none}
+  .lc-hero{min-height:92vh}
+  .lc-cta{border-radius:16px;width:100%;max-width:100%}
 }
 `;
 
@@ -1009,6 +1061,7 @@ function ReserveModal({ open, onClose }: { open: boolean; onClose: () => void })
           </div>
         </div>
         <div className="lc-res-form-side">
+          <div className="lc-res-bar" />
           <div className="lc-res-head">
             <h2 className="lc-res-title">Request for Booking</h2>
             <button className="lc-res-x" onClick={onClose} aria-label="Close">
@@ -1327,6 +1380,8 @@ function MenuPage() {
 export default function App() {
   const [page, setPage] = useState<'home' | 'menu'>('home');
   const [reserveOpen, setReserveOpen] = useState(false);
+  const [mobMenu, setMobMenu] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const el = document.createElement('style');
@@ -1336,12 +1391,36 @@ export default function App() {
     return () => { document.getElementById('lc-styles')?.remove(); };
   }, []);
 
+  // Loading screen: wait for readyState, plus 600ms buffer, with 3.5s max fallback
+  useEffect(() => {
+    const maxTimer = setTimeout(() => setLoaded(true), 3500);
+    if (document.readyState === 'complete') {
+      const t = setTimeout(() => setLoaded(true), 600);
+      return () => { clearTimeout(t); clearTimeout(maxTimer); };
+    }
+    const onLoad = () => {
+      const t = setTimeout(() => setLoaded(true), 600);
+      return () => clearTimeout(t);
+    };
+    window.addEventListener('load', onLoad);
+    return () => { window.removeEventListener('load', onLoad); clearTimeout(maxTimer); };
+  }, []);
+
   const go = useCallback((p: 'home' | 'menu') => {
-    setPage(p); window.scrollTo({ top: 0, behavior: 'smooth' });
+    setPage(p); setMobMenu(false); window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   return (
     <div style={{ minHeight: '100vh' }}>
+      {/* Loading Screen */}
+      <div className={`lc-loader${loaded ? ' done' : ''}`}>
+        <div className="lc-loader-content">
+          <div className="lc-loader-title">Lambreta<em>Café</em></div>
+          <div className="lc-loader-bar"><div className="lc-loader-shimmer" /></div>
+          <div className="lc-loader-text">Brewing your experience</div>
+        </div>
+      </div>
+
       <nav className="lc-nav" role="navigation" aria-label="Main navigation">
         <button className="lc-logo" onClick={() => go('home')}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9906A" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -1354,7 +1433,22 @@ export default function App() {
           <li><button onClick={() => go('home')} className={page === 'home' ? 'active' : ''}>Home</button></li>
           <li><button onClick={() => go('menu')} className={page === 'menu' ? 'active' : ''}>Menu</button></li>
         </ul>
+        <button className="lc-ham" onClick={() => setMobMenu(!mobMenu)} aria-label={mobMenu ? 'Close menu' : 'Open menu'} aria-expanded={mobMenu}>
+          {mobMenu ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          )}
+        </button>
       </nav>
+
+      {/* Mobile Menu */}
+      <div className={`lc-mob-menu${mobMenu ? ' open' : ''}`}>
+        <button onClick={() => go('home')}>Home</button>
+        <button onClick={() => go('menu')}>Menu</button>
+        <button onClick={() => { setReserveOpen(true); setMobMenu(false); }}>Reserve</button>
+      </div>
+
       <main key={page} className="lc-page">
         {page === 'home' ? <LandingPage goMenu={() => go('menu')} /> : <MenuPage />}
       </main>
