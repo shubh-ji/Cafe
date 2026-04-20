@@ -48,13 +48,15 @@ input,select,textarea{font-family:inherit}
 .lc-navlinks button:hover::after,.lc-navlinks button.active::after{width:100%}
 
 /* ── Mobile Hamburger */
-.lc-ham{display:none;background:none;border:none;color:#F7F0E6;width:32px;height:32px;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.lc-ham{display:none;background:none;border:none;color:#F7F0E6;width:32px;height:32px;padding:0;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:color 0.25s}
+.lc-ham:hover{color:var(--pri)}
 .lc-ham svg{width:20px;height:20px}
+@media(max-width:640px){.lc-ham{display:flex;order:3;margin-left:auto}}
 .lc-mob-menu{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:290;background:rgba(44,42,36,0.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;translate:0 -100%;pointer-events:none;transition:opacity 0.35s,translate 0.35s cubic-bezier(0.16,1,0.3,1)}
 .lc-mob-menu.open{opacity:1;translate:0;pointer-events:auto}
-.lc-mob-menu button{background:none;border:none;color:#C8B89A;font-size:1rem;letter-spacing:0.16em;text-transform:uppercase;transition:color 0.25s;padding:0}
+.lc-mob-menu button{background:none;border:none;color:#C8B89A;font-size:1rem;letter-spacing:0.16em;text-transform:uppercase;transition:color 0.25s;padding:0;cursor:pointer}
 .lc-mob-menu button:hover{color:var(--pri)}
-@media(max-width:640px){.lc-ham{display:flex}.lc-navlinks{display:none}}
+@media(max-width:640px){.lc-navlinks{display:none}}
 
 /* ── Page */
 .lc-page{opacity:1}
@@ -111,6 +113,9 @@ input,select,textarea{font-family:inherit}
 .lc-kota-title{color:var(--sec);margin-bottom:8px;font-size:1.05rem}
 .lc-kota-desc{color:var(--muted);line-height:1.75;font-size:0.88rem}
 .lc-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+
+/* Hide first and third feature cards on mobile, keep only Chhattisgarhi Kitchen */
+@media(max-width:640px){.lc-feats .lc-kota:nth-child(1),.lc-feats .lc-kota:nth-child(3){display:none}.lc-feats{grid-template-columns:1fr}}
 
 /* ── Food Carousel */
 .lc-touch-sec{background:var(--sec);padding:80px 0;overflow:hidden}
@@ -214,6 +219,8 @@ input,select,textarea{font-family:inherit}
 .lc-find-btn svg{flex-shrink:0}
 .lc-find-map-wrap{border-radius:12px;overflow:hidden;border:1px solid rgba(201,144,106,0.2);box-shadow:0 8px 40px rgba(44,42,36,0.1)}
 .lc-find-accent{display:block;height:3px;background:linear-gradient(to right,var(--pri),transparent);border-radius:2px;margin-bottom:36px}
+.lc-map{width:100%;height:400px;border-radius:12px;z-index:1}
+@media(max-width:640px){.lc-map{height:280px}}
 
 /* ── Leaflet overrides */
 .leaflet-container{font-family:system-ui,-apple-system,sans-serif}
@@ -401,6 +408,19 @@ input,select,textarea{font-family:inherit}
   .lc-res-bar{display:flex;justify-content:center;margin-bottom:16px}
   .lc-res-row{grid-template-columns:1fr}
   .lc-nooks{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .lc-res-ov{padding:0}
+  .lc-res-panel{max-width:100%;border-radius:20px 20px 0 0;position:absolute;bottom:0;max-height:95vh;flex-direction:column}
+  .lc-res-form-side{padding:20px 18px 28px;max-height:calc(95vh - 100px);overflow-y:auto}
+  .lc-res-bar{margin-bottom:12px}
+  .lc-res-head{margin-bottom:14px}
+  .lc-res-title{font-size:1.1rem}
+  .lc-res-input{padding:10px 12px;font-size:0.85rem}
+  .lc-res-field{margin-bottom:12px}
+  .lc-nook{padding:12px 10px}
+  .lc-nook-ico{width:30px;height:30px}
+  .lc-res-submit{padding:12px;font-size:0.9rem}
   .lc-find{padding:64px 20px}
   .lc-find-inner{grid-template-columns:1fr;gap:40px}
   .lc-find-heading{text-align:center;font-size:clamp(1.5rem,4vw,2rem)}
@@ -912,6 +932,7 @@ function CafeMap() {
     <div
       ref={mapDivRef}
       style={{ width: '100%', height: '400px', borderRadius: '12px', zIndex: 1 }}
+      className="lc-map"
       role="application"
       aria-label="Interactive map showing Lambreta Café location in Civil Lines, Raipur"
     />
