@@ -248,7 +248,8 @@ input,select,textarea{font-family:inherit}
 
 /* ── Menu Accordion */
 .lc-menu-body{padding:64px 64px 80px;max-width:980px;margin:0 auto}
-.lc-menu-cat{margin-bottom:10px;border:1px solid rgba(201,144,106,0.18);border-radius:8px;overflow:hidden}
+.lc-menu-cat{margin-bottom:10px;border:1px solid rgba(201,144,106,0.18);border-radius:8px;overflow:hidden;transition:box-shadow 0.3s,transform 0.3s}
+.lc-menu-cat:hover{box-shadow:0 4px 16px rgba(201,144,106,0.15);transform:translateY(-2px)}
 .lc-cat-hdr{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;background:var(--surf);border:none;width:100%;text-align:left;transition:background 0.25s;position:relative;overflow:hidden}
 .lc-cat-hdr:hover{background:#E4D8C8}
 .lc-cat-hdr::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--pri);transition:width 0.4s ease}
@@ -259,7 +260,8 @@ input,select,textarea{font-family:inherit}
 .lc-menu-cat.open .lc-cat-tog{transform:rotate(45deg)}
 .lc-items-wrap{max-height:0;overflow:hidden;transition:max-height 0.55s cubic-bezier(0.16,1,0.3,1);background:var(--parch)}
 .lc-menu-cat.open .lc-items-wrap{max-height:1400px}
-.lc-item{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 32px;border-top:1px solid rgba(201,144,106,0.1);opacity:0;transform:translateY(12px);transition:opacity 0.4s,transform 0.4s,border-left-color 0.25s;border-left:3px solid transparent;position:relative}
+.lc-item{display:flex;align-items:flex-start;justify-content:space-between;padding:20px 32px;border-top:1px solid rgba(201,144,106,0.1);opacity:0;transform:translateY(12px);transition:opacity 0.4s,transform 0.4s,border-left-color 0.25s,background 0.25s;border-left:3px solid transparent;position:relative;background:var(--parch)}
+.lc-item:hover{background:rgba(201,144,106,0.04)}
 .lc-item::before{content:'';position:absolute;left:35px;right:32px;bottom:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,144,106,0.08),transparent)}
 .lc-menu-cat.open .lc-item{opacity:1;transform:translateY(0)}
 .lc-menu-cat.open .lc-item:nth-child(1){transition-delay:0.05s}
@@ -342,7 +344,8 @@ input,select,textarea{font-family:inherit}
 .lc-res-confirm{text-align:center;padding:40px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px}
 .lc-res-conf-title{color:var(--sec);font-family:Georgia,serif;margin-bottom:10px;font-size:1.2rem;margin-top:18px}
 .lc-res-conf-sub{color:var(--muted);font-size:0.88rem;line-height:1.7;max-width:380px}
-@media(max-width:768px){.lc-res-visual{display:none}.lc-res-panel{max-width:480px;border-radius:20px}.lc-res-form-side{padding:28px 24px 24px}}
+@media(max-width:768px){.lc-res-visual{width:100%;min-height:200px;display:flex}.lc-res-panel{max-width:100%;border-radius:20px;flex-direction:column;max-height:95vh}.lc-res-form-side{padding:28px 24px 24px}}
+@media(max-width:640px){.lc-res-visual{min-height:180px}}
 
 /* ── FAB */
 .lc-fab{position:fixed;bottom:28px;right:28px;z-index:250;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
@@ -386,13 +389,16 @@ input,select,textarea{font-family:inherit}
   .lc-fab{bottom:20px;right:16px}
   .lc-fab-btn{padding:12px 18px;font-size:0.78rem;border-radius:20px}
   .lc-feats{grid-template-columns:1fr}
-  .lc-menu-hero{padding:120px 20px 52px}
-  .lc-menu-body{padding:40px 20px 60px}
+  .lc-menu-hero{padding:100px 20px 48px}
+  .lc-menu-body{padding:32px 16px 60px}
   .lc-quote{padding:72px 24px}
-  .lc-cat-hdr{padding:18px 20px}
-  .lc-item{padding:16px 20px;flex-wrap:wrap;gap:12px}
-  .lc-item-name{font-size:1rem}
-  .lc-price{font-size:0.95rem}
+  .lc-menu-cat{margin-bottom:12px;border-radius:12px;box-shadow:0 2px 8px rgba(201,144,106,0.08)}
+  .lc-cat-hdr{padding:18px 18px;background:linear-gradient(135deg,var(--surf),#EFE5D8)}
+  .lc-cat-name{font-size:0.96rem}
+  .lc-item{padding:16px 18px;flex-wrap:wrap;gap:12px;border-left-width:4px}
+  .lc-item-name{font-size:0.98rem;font-weight:500}
+  .lc-item-desc{font-size:0.8rem}
+  .lc-price{font-size:0.92rem}
   .lc-footer{padding:48px 20px 24px}
   .lc-footer-grid{grid-template-columns:1fr;gap:28px}
   .lc-footer-bar{flex-direction:column;text-align:center;gap:12px}
