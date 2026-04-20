@@ -105,13 +105,13 @@ input,select,textarea{font-family:inherit}
 
 /* ── Feature Cards (light/shadow micro-interaction) */
 .lc-kota{position:relative;background:var(--surf);border-radius:8px;padding:40px 32px;border:1px solid rgba(201,144,106,0.14);overflow:hidden;transition:transform 0.3s,box-shadow 0.3s;--mx:50%;--my:50%}
-.lc-kota::before{content:'';position:absolute;inset:0;background:radial-gradient(200px at var(--mx) var(--my),rgba(255,228,160,0.18) 0%,transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:0}
-.lc-kota::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.15;transition:opacity 0.4s;z-index:0;pointer-events:none}
-.lc-kota.has-bg::after{opacity:0.25}
+.lc-kota::before{content:'';position:absolute;inset:0;background:radial-gradient(200px at var(--mx) var(--my),rgba(255,228,160,0.18) 0%,transparent 70%);opacity:0;transition:opacity 0.4s;pointer-events:none;z-index:1}
+.lc-kota::after{content:'';position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0.1;transition:opacity 0.4s;z-index:0;pointer-events:none}
+.lc-kota.has-bg::after{opacity:0.14}
 .lc-kota:hover{transform:translateY(-4px);box-shadow:0 20px 52px rgba(44,42,36,0.12)}
 .lc-kota:hover::before{opacity:1}
-.lc-kota:hover.has-bg::after{opacity:0.35}
-.lc-kota>*{position:relative;z-index:1}
+.lc-kota:hover.has-bg::after{opacity:0.22}
+.lc-kota>*{position:relative;z-index:2}
 .lc-kota-icon{width:48px;height:48px;background:var(--pri);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:22px;color:#F7F0E6}
 .lc-kota-title{color:var(--sec);margin-bottom:8px;font-size:1.05rem}
 .lc-kota-desc{color:var(--muted);line-height:1.75;font-size:0.88rem}
@@ -638,7 +638,7 @@ function AnimHead({ line1, line2 }: { line1: string; line2: string }) {
 }
 
 // ─── FEATURE CARD (Kota micro-interaction) ───────────────────────────────────
-function KotaCard({ icon, title, desc, delay, bgImg }: { icon: React.ReactNode; title:string; desc:string; delay:number; bgImg?:string }) {
+function KotaCard({ icon, title, desc, delay, bgImg }: { icon: React.ReactNode; title:string; desc:string; delay:number; bgImg?:string | any }) {
   const ref = useRef<HTMLDivElement>(null);
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = ref.current; if (!el) return;
@@ -646,8 +646,9 @@ function KotaCard({ icon, title, desc, delay, bgImg }: { icon: React.ReactNode; 
     el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
     el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
   };
+  const bgUrl = bgImg ? (typeof bgImg === 'string' ? bgImg : bgImg) : undefined;
   return (
-    <div ref={ref} className={`lc-kota lc-fi${bgImg ? ' has-bg' : ''}`} style={{ transitionDelay: `${delay}s`, ...(bgImg ? { '--bg-img': `url('${bgImg}')` } as React.CSSProperties : {}) }} onMouseMove={onMove}>
+    <div ref={ref} className={`lc-kota lc-fi${bgImg ? ' has-bg' : ''}`} style={{ transitionDelay: `${delay}s`, ...(bgUrl ? { '--bg-img': `url(${bgUrl})` } as React.CSSProperties : {}) }} onMouseMove={onMove}>
       <style>{`
         .lc-kota[style*="--bg-img"]::after {
           background-image: var(--bg-img);
@@ -1317,7 +1318,8 @@ function LandingPage({ goMenu }: { goMenu: () => void }) {
               title="Chhattisgarhi Kitchen"
               desc="Dal bafla, poha platters, heritage thalis — we cook Raipur's soul food with recipes passed down through generations."
               delay={0.12}
-              bgImg={FOOD_IMG_CAFE_INT}
+              bgImg={img0}
+            />
             />
             <KotaCard
               icon={<IconLeaf size={22} />}
