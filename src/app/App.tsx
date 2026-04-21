@@ -92,6 +92,9 @@ input,select,textarea{font-family:inherit}
 @media(prefers-reduced-motion:no-preference){.lc-cta.go{animation:floatY 3.2s ease-in-out 1.8s infinite}}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .lc-cta:hover{background:#D4A07A;box-shadow:0 14px 42px rgba(201,144,106,0.55)}
+.lc-cta-secondary{border:1.5px solid var(--pri);background:rgba(201,144,106,0.15);color:var(--pri);padding:16px 42px;border-radius:24px;font-family:Georgia,serif;font-size:0.95rem;letter-spacing:0.06em;transition:all 0.3s;cursor:pointer;font-size:0.95rem}
+.lc-cta-secondary:hover{background:rgba(201,144,106,0.25);box-shadow:0 8px 24px rgba(201,144,106,0.2)}
+.lc-cta-secondary.go{opacity:1;transform:translateY(0)}
 .lc-scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(228,210,182,0.45);font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase}
 .lc-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(201,144,106,0.7),transparent)}
 @media(prefers-reduced-motion:no-preference){.lc-scroll-line{animation:sLine 2.2s ease-in-out infinite}}
@@ -173,9 +176,17 @@ input,select,textarea{font-family:inherit}
 .lc-tilt-marq-track{display:flex;gap:24px;width:max-content}
 @media(prefers-reduced-motion:no-preference){.lc-tilt-marq-track{animation:tiltMarq 30s linear infinite}}
 .lc-tilt-marq-outer:hover .lc-tilt-marq-track{animation-play-state:paused}
+@media(max-width:768px){.lc-tilt-marq-outer{padding:40px 0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.lc-tilt-marq-outer::-webkit-scrollbar{display:none}
+.lc-tilt-marq-outer::before,.lc-tilt-marq-outer::after{display:none}
+.lc-tilt-marq-track{animation:none!important;width:100%;gap:16px;padding:0 16px}}
+@media(max-width:640px){.lc-tilt-marq-outer{padding:32px 0}
+.lc-tilt-marq-track{gap:12px;padding:0 12px}}
 @keyframes tiltMarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.lc-tilt{border-radius:10px;overflow:hidden;position:relative;width:400px;height:320px;flex-shrink:0;transform-style:preserve-3d;transition:transform 0.18s ease,box-shadow 0.3s}
+.lc-tilt{border-radius:10px;overflow:hidden;position:relative;width:400px;height:320px;flex-shrink:0;transform-style:preserve-3d;transition:transform 0.18s ease,box-shadow 0.3s;scroll-snap-align:center;scroll-snap-stop:always}
 .lc-tilt:hover{box-shadow:0 24px 64px rgba(44,42,36,0.24)}
+@media(max-width:768px){.lc-tilt{width:280px;height:240px;border-radius:12px;box-shadow:0 8px 24px rgba(44,42,36,0.12)}}
+@media(max-width:640px){.lc-tilt{width:240px;height:200px;border-radius:10px;box-shadow:0 4px 16px rgba(44,42,36,0.1)}}
 .lc-tilt-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .lc-tilt-tint{position:absolute;inset:0}
 .lc-tilt-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(28,18,10,0.88) 0%,rgba(28,18,10,0.18) 55%,transparent 100%)}
@@ -308,8 +319,8 @@ input,select,textarea{font-family:inherit}
 .lc-ar-close{background:var(--acc);color:#F7F0E6;border:none;padding:11px 28px;border-radius:24px;font-size:0.85rem;transition:background 0.25s}
 .lc-ar-close:hover{background:#7A8E6A}
 
-/* ── Reserve Modal (FAB) */
-.lc-res-ov{position:fixed;inset:0;z-index:500;background:rgba(10,7,4,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.35s;display:flex;align-items:center;justify-content:center;padding:20px}
+/* ── Reserve Modal (FAB) - Enhanced Mobile UX */
+.lc-res-ov{position:fixed;inset:0;z-index:500;background:rgba(10,7,4,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity 0.35s;display:flex;align-items:flex-end;justify-content:center;padding:0}
 .lc-res-ov.open{opacity:1;pointer-events:auto}
 .lc-res-panel{display:flex;width:100%;max-width:880px;max-height:92vh;border-radius:20px;overflow:hidden;background:#F7F0E6;transform:scale(0.92) translateY(24px);opacity:0;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),opacity 0.4s;box-shadow:0 32px 80px rgba(20,14,8,0.4),0 0 0 1px rgba(201,144,106,0.1)}
 .lc-res-ov.open .lc-res-panel{transform:scale(1) translateY(0);opacity:1}
@@ -324,8 +335,9 @@ input,select,textarea{font-family:inherit}
 .lc-res-bar{display:none;height:4px;width:40px;background:rgba(201,144,106,0.3);border-radius:2px;margin:0 auto 16px}
 .lc-res-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .lc-res-title{font-family:Georgia,serif;color:var(--sec);font-size:1.35rem;line-height:1.2}
-.lc-res-x{background:rgba(44,42,36,0.06);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background 0.25s,color 0.25s;flex-shrink:0}
+.lc-res-x{background:rgba(44,42,36,0.06);border:none;color:var(--muted);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background 0.25s,color 0.25s;flex-shrink:0;cursor:pointer}
 .lc-res-x:hover{background:rgba(44,42,36,0.12);color:var(--sec)}
+.lc-res-x:active{transform:scale(0.95)}
 .lc-res-subtitle{color:var(--muted);font-size:0.82rem;margin-bottom:28px;line-height:1.5}
 .lc-res-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:0}
 .lc-res-field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
@@ -334,21 +346,22 @@ input,select,textarea{font-family:inherit}
 .lc-res-input:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(201,144,106,0.1);background:#fff}
 .lc-res-input::placeholder{color:rgba(92,79,66,0.35)}
 .lc-nooks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.lc-nook{background:rgba(44,42,36,0.03);border:1.5px solid rgba(201,144,106,0.15);border-radius:12px;padding:14px 12px;text-align:left;transition:all 0.3s cubic-bezier(0.16,1,0.3,1)}
+.lc-nook{background:rgba(44,42,36,0.03);border:1.5px solid rgba(201,144,106,0.15);border-radius:12px;padding:14px 12px;text-align:left;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);cursor:pointer}
 .lc-nook:hover{background:rgba(201,144,106,0.06);border-color:rgba(201,144,106,0.35)}
 .lc-nook.sel{border-color:var(--pri);background:rgba(201,144,106,0.08);box-shadow:0 0 0 3px rgba(201,144,106,0.1)}
+.lc-nook:active{transform:scale(0.98)}
 .lc-nook-ico{width:34px;height:34px;border-radius:10px;background:rgba(201,144,106,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:8px;color:var(--pri);transition:background 0.3s,color 0.3s}
 .lc-nook.sel .lc-nook-ico{background:var(--pri);color:#F7F0E6}
-.lc-nook-name{color:var(--sec);font-size:0.84rem;margin-bottom:2px}
+.lc-nook-name{color:var(--sec);font-size:0.84rem;margin-bottom:2px;font-weight:500}
 .lc-nook-cap{color:var(--muted);font-size:0.7rem}
-.lc-res-submit{width:100%;background:var(--sec);color:#F7F0E6;border:none;padding:14px;border-radius:12px;font-family:Georgia,serif;font-size:0.95rem;letter-spacing:0.04em;transition:all 0.3s;position:relative;overflow:hidden}
+.lc-res-submit{width:100%;background:var(--sec);color:#F7F0E6;border:none;padding:14px;border-radius:12px;font-family:Georgia,serif;font-size:0.95rem;letter-spacing:0.04em;transition:all 0.3s;position:relative;overflow:hidden;cursor:pointer;font-weight:600}
 .lc-res-submit:hover{background:#3D3930;box-shadow:0 8px 24px rgba(44,42,36,0.25);transform:translateY(-1px)}
 .lc-res-submit:active{transform:translateY(0)}
 .lc-res-confirm{text-align:center;padding:40px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:320px}
-.lc-res-conf-title{color:var(--sec);font-family:Georgia,serif;margin-bottom:10px;font-size:1.2rem;margin-top:18px}
+.lc-res-conf-title{color:var(--sec);font-family:Georgia,serif;margin-bottom:10px;font-size:1.2rem;margin-top:18px;font-weight:600}
 .lc-res-conf-sub{color:var(--muted);font-size:0.88rem;line-height:1.7;max-width:380px}
 @media(max-width:768px){.lc-res-visual{width:100%;min-height:200px;display:flex}.lc-res-panel{max-width:100%;border-radius:20px;flex-direction:column;max-height:95vh}.lc-res-form-side{padding:28px 24px 24px}}
-@media(max-width:640px){.lc-res-visual{min-height:180px}}
+@media(max-width:640px){.lc-res-visual{display:none;width:0;min-height:0}.lc-res-panel{border-radius:24px 24px 0 0;flex-direction:column;width:100%;max-height:90vh;position:absolute;bottom:0;left:0;right:0;transform:translateY(100%);opacity:0}.lc-res-ov.open .lc-res-panel{transform:translateY(0);opacity:1}.lc-res-form-side{padding:24px 20px 32px;max-height:calc(90vh - 80px);overflow-y:auto;-webkit-overflow-scrolling:touch}.lc-res-bar{display:flex;justify-content:center;margin-bottom:12px;height:5px;width:48px;background:rgba(201,144,106,0.25);border-radius:3px}.lc-res-head{margin-bottom:16px}.lc-res-title{font-size:1.2rem}.lc-res-subtitle{margin-bottom:20px;font-size:0.8rem}.lc-res-row{grid-template-columns:1fr;gap:12px}.lc-res-field{margin-bottom:12px}.lc-res-field label{font-size:0.68rem}.lc-res-input{padding:10px 12px;font-size:0.85rem;border-radius:8px}.lc-nooks{grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}.lc-nook{padding:12px 10px;border-radius:10px}.lc-nook-ico{width:30px;height:30px;font-size:0.9rem}.lc-nook-name{font-size:0.8rem}.lc-nook-cap{font-size:0.65rem}.lc-res-submit{padding:12px;font-size:0.9rem;margin-bottom:12px}.lc-res-x{width:28px;height:28px}}
 
 /* ── FAB */
 .lc-fab{position:fixed;bottom:28px;right:28px;z-index:250;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
@@ -679,7 +692,7 @@ const FOOD_CARDS: { img: string; tag: string; title: string; desc: string; premi
   { img: FOOD_IMG_THALI, tag:'Heritage', title:'Raipur Heritage Thali', desc:'Dal bafla, checheli ki sabzi, rice, chaas and pickles — a full Chhattisgarhi meal on one plate.', premium: true },
 ];
 
-function FromOurKitchen() {
+function FromOurKitchen({ onExplore }: { onExplore: () => void }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -839,11 +852,44 @@ function FromOurKitchen() {
           />
         ))}
       </div>
+      <div style={{ textAlign: 'center', paddingTop: '32px' }}>
+        <button
+          onClick={onExplore}
+          style={{
+            background: 'var(--pri)',
+            color: '#F7F0E6',
+            border: 'none',
+            padding: '12px 32px',
+            borderRadius: '20px',
+            fontFamily: 'Georgia,serif',
+            fontSize: '0.9rem',
+            letterSpacing: '0.04em',
+            cursor: 'pointer',
+            transition: 'all 0.3s',
+            boxShadow: '0 6px 20px rgba(201,144,106,0.25)',
+            fontWeight: '600'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = '#D4A07A';
+            e.currentTarget.style.boxShadow = '0 10px 28px rgba(201,144,106,0.4)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'var(--pri)';
+            e.currentTarget.style.boxShadow = '0 6px 20px rgba(201,144,106,0.25)';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+          aria-label="View all menu items"
+        >
+          View All Items
+        </button>
+      </div>
     </section>
   );
 }
 
-// ─── TILT CARD (3D mouse-tilt, used in marquee) ───────────────────────────────
+// ─── MENU CTA SECTION ─────────────────────────────────────────────────────────
+
 const TILT_DATA = [
   { tag: 'Ambience', title: 'Earthy Ambience', desc: 'A space that breathes and calms — built to make you slow down.', image: img1, tint: '#5C2E10' },
   { tag: 'Character', title: 'Rooted in Raipur', desc: 'Crafted from the land beneath our feet. Every surface has a story.', image: img2, tint: '#2A3A28' },
@@ -880,15 +926,71 @@ function TiltCard({ tag, title, desc, image, tint }: { tag:string; title:string;
 }
 
 function TiltMarquee() {
-  const doubled = [...TILT_DATA, ...TILT_DATA, ...TILT_DATA, ...TILT_DATA]; // enough copies for seamless loop
+  const [activeIdx, setActiveIdx] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+  useEffect(() => {
+    if (!isMobile || !trackRef.current) return;
+    
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const track = trackRef.current;
+        if (!track) return;
+        const itemWidth = track.children[0]?.getBoundingClientRect().width || 0;
+        const gap = 16;
+        const idx = Math.round((track.scrollLeft + itemWidth / 2) / (itemWidth + gap));
+        setActiveIdx(Math.min(idx, TILT_DATA.length - 1));
+        ticking = false;
+      });
+    };
+
+    trackRef.current.addEventListener('scroll', onScroll, { passive: true });
+    return () => trackRef.current?.removeEventListener('scroll', onScroll);
+  }, [isMobile]);
+
+  const doubled = isMobile ? TILT_DATA : [...TILT_DATA, ...TILT_DATA, ...TILT_DATA, ...TILT_DATA];
+  
   return (
-    <div className="lc-tilt-marq-outer" aria-hidden="true">
-      <div className="lc-tilt-marq-track">
-        {doubled.map((c, i) => <TiltCard key={i} {...c} />)}
+    <>
+      <div className="lc-tilt-marq-outer" ref={trackRef} role="region" aria-label="Rooted in Raipur showcase">
+        <div className="lc-tilt-marq-track">
+          {doubled.map((c, i) => <TiltCard key={i} {...c} />)}
+        </div>
       </div>
-    </div>
+      {isMobile && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', paddingTop: '16px', background: 'var(--surf)' }}>
+          {TILT_DATA.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => {
+                if (trackRef.current && trackRef.current.children[i]) {
+                  trackRef.current.children[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+              }}
+              style={{
+                width: activeIdx === i ? '24px' : '8px',
+                height: '8px',
+                background: activeIdx === i ? 'var(--pri)' : 'rgba(201,144,106,0.25)',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+                padding: 0
+              }}
+              aria-label={`View card ${i + 1}`}
+              aria-pressed={activeIdx === i}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
+
 
 // ─── LEAFLET MAP ──────────────────────────────────────────────────────────────
 function CafeMap() {
@@ -955,7 +1057,7 @@ function CafeMap() {
 }
 
 // ─── COME FIND US SECTION ─────────────────────────────────────────────────────
-function FindUsSection() {
+function FindUsSection({ goMenu, onContact }: { goMenu: () => void; onContact: () => void }) {
   return (
     <section className="lc-find">
       <div className="lc-find-inner">
@@ -997,6 +1099,10 @@ function FindUsSection() {
             <IconNavigation />
             Get Directions
           </a>
+          <button onClick={onContact} className="lc-find-btn" style={{ background: 'var(--pri)', color: '#F7F0E6', marginTop: '20px', marginLeft: '0' }} aria-label="Contact us and request a booking">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            Contact Us
+          </button>
         </div>
         <div className="lc-fi" style={{ transitionDelay: '0.15s' }}>
           <div className="lc-find-map-wrap">
@@ -1267,7 +1373,7 @@ function SiteFooter() {
 }
 
 // ─── LANDING PAGE ─────────────────────────────────────────────────────────────
-function LandingPage({ goMenu }: { goMenu: () => void }) {
+function LandingPage({ goMenu, onContact }: { goMenu: () => void; onContact: () => void }) {
   const [ready, setReady] = useState(false);
   useEffect(() => { const t = setTimeout(() => setReady(true), 120); return () => clearTimeout(t); }, []);
   useScrollAnim([]);
@@ -1291,7 +1397,10 @@ function LandingPage({ goMenu }: { goMenu: () => void }) {
           <p className={`lc-sub${ready ? ' go' : ''}`} style={{ fontSize: 'clamp(0.95rem,2vw,1.15rem)' }}>
             Handcrafted drinks, honest food, and a space that feels like home.
           </p>
-          <button className={`lc-cta${ready ? ' go' : ''}`} onClick={goMenu}>Explore Our Menu</button>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button className={`lc-cta${ready ? ' go' : ''}`} onClick={goMenu} style={{ margin: 0 }}>Explore Our Menu</button>
+            <button className={`lc-cta-secondary${ready ? ' go' : ''}`} onClick={goMenu} style={{ background: 'rgba(201,144,106,0.15)', color: 'var(--pri)', border: '1.5px solid var(--pri)', margin: 0, cursor: 'pointer', transition: 'all 0.3s' }} onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(201,144,106,0.25)'; }} onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(201,144,106,0.15)'; }}>Browse Our Specials</button>
+          </div>
         </div>
         <div className="lc-scroll-hint" aria-hidden="true"><div className="lc-scroll-line" /><span>Scroll</span></div>
       </section>
@@ -1320,7 +1429,6 @@ function LandingPage({ goMenu }: { goMenu: () => void }) {
               delay={0.12}
               bgImg={img0}
             />
-            />
             <KotaCard
               icon={<IconLeaf size={22} />}
               title="Farm-Fresh Ingredients"
@@ -1333,7 +1441,7 @@ function LandingPage({ goMenu }: { goMenu: () => void }) {
 
       <div className="lc-divider" />
 
-      <FromOurKitchen />
+      <FromOurKitchen onExplore={goMenu} />
 
       {/* ── Pull Quote ── */}
       <section className="lc-quote">
@@ -1344,9 +1452,16 @@ function LandingPage({ goMenu }: { goMenu: () => void }) {
       </section>
 
       {/* ── Tilt Card Marquee ── */}
-      <TiltMarquee />
+      <section style={{ background: 'var(--surf)', paddingTop: '32px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', paddingLeft: 'clamp(20px,5vw,64px)', paddingRight: 'clamp(20px,5vw,64px)', marginBottom: '28px' }}>
+          <p style={{ color: 'var(--pri)', fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', marginBottom: '12px' }}>Experience</p>
+          <h2 style={{ color: 'var(--sec)', marginBottom: '12px', fontSize: 'clamp(1.75rem,3.2vw,2.4rem)', fontFamily: 'Georgia,serif' }}>What makes us special</h2>
+          <p style={{ color: 'var(--muted)', fontSize: 'clamp(0.85rem,2vw,0.9rem)', maxWidth: '600px', lineHeight: '1.6' }}>From our earthy ambiance to handcrafted comfort, discover the details that define Lambreta Café.</p>
+        </div>
+        <TiltMarquee />
+      </section>
 
-      <FindUsSection />
+      <FindUsSection goMenu={goMenu} onContact={onContact} />
 
       <SiteFooter />
     </>
@@ -1488,7 +1603,7 @@ export default function App() {
       </div>
 
       <main key={page} className="lc-page">
-        {page === 'home' ? <LandingPage goMenu={() => go('menu')} /> : <MenuPage />}
+        {page === 'home' ? <LandingPage goMenu={() => go('menu')} onContact={() => setReserveOpen(true)} /> : <MenuPage />}
       </main>
       <FAB onReserve={() => setReserveOpen(true)} />
       <ReserveModal open={reserveOpen} onClose={() => setReserveOpen(false)} />
