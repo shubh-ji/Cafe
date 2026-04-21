@@ -448,7 +448,7 @@ input,select,textarea{font-family:inherit}
   .lc-find-heading{text-align:center;font-size:clamp(1.5rem,4vw,2rem)}
   .lc-find-sub{text-align:center}
   .lc-find-detail{margin-bottom:20px}
-  .lc-find-btn{display:flex;justify-content:center;width:100%;padding:8px 12px;font-size:0.7rem}
+  .lc-find-btn{display:flex;justify-content:center;width:100%;padding:6px 10px;font-size:0.65rem}
   .lc-tilt{width:280px;height:240px}
   .lc-tilt-marq-outer{padding:32px 0}
   .lc-tilt-marq-track{animation:tiltMarq 45s linear infinite}
